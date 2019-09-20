@@ -61,20 +61,24 @@ setInterval(() => {
 
                 let videoWithTheMostViews = edges.filter(post => (post.node.__typename === "GraphVideo"
                     && post.node.taken_at_timestamp > moment().subtract(30, 'minutes').unix()
-                    && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length
+                    && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length === 0
                     && !blackList.includes(post.node.owner.id)))
-                    .sort((a, b) => b.node.video_view_count - a.node.video_view_count)[0];
+                    .sort((a, b) => b.node.video_view_count - a.node.video_view_count)[0] || null;
 
                 let imageWithTheMostLikes = edges.filter(post => (post.node.__typename === "GraphImage"
                     && post.node.taken_at_timestamp > moment().subtract(30, 'minutes').unix()
-                    && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length
+                    && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length === 0
                     && !blackList.includes(post.node.owner.id)))
-                    .sort((a, b) => b.node.edge_liked_by.count - a.node.edge_liked_by.count)[0];
+                    .sort((a, b) => b.node.edge_liked_by.count - a.node.edge_liked_by.count)[0] || null;
 
                 [videoWithTheMostViews, imageWithTheMostLikes].forEach(post => {
-                    bot.sendMessage(hashtag.userId, `https://www.instagram.com/p/${post.node.shortcode}/`);
+                    if (post !== null) {
+                        bot.sendMessage(hashtag.userId, `https://www.instagram.com/p/${post.node.shortcode}/`);
+                    }
                 });
             })
-            .catch(err => bot.sendMessage(hashtag.userId, err));
+            .catch(err => console.log(err));
     }
-}, 1800000);
+}, 10000);
+
+//bot.sendMessage(hashtag.userId, err.message)
