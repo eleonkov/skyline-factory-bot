@@ -2,8 +2,11 @@ require('newrelic');
 
 const moment = require('moment');
 const fetch = require('node-fetch');
+const express = require('express')
 
 process.env.NTBA_FIX_319 = 1;
+
+const app = express()
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -80,8 +83,10 @@ setInterval(() => {
                     }
                 });
             })
-            .catch(err => console.log(err));
+            .catch(err => bot.sendMessage(hashtag.userId, err.message));
     }
+
+    console.log
 }, 1800000);
 
-//bot.sendMessage(hashtag.userId, err.message)
+app.listen(process.env.PORT || 5000);
