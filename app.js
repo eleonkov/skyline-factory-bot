@@ -1,3 +1,5 @@
+require('newrelic');
+
 const moment = require('moment');
 const fetch = require('node-fetch');
 
@@ -19,7 +21,8 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
     "3584001259"
 ];
 
-const stopWords = ['via', 'dm', 'tag', 'follow'];
+const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
+    'repost', 'tap', 'credits', 'credit', 'siga'] ;
 
 const token = '846500630:AAHcIYj2O7ooF7H7m0p8Pwp0idmOVEaVW4c';
 const bot = new TelegramBot(token, { polling: true });
@@ -79,6 +82,6 @@ setInterval(() => {
             })
             .catch(err => console.log(err));
     }
-}, 10000);
+}, 1800000);
 
 //bot.sendMessage(hashtag.userId, err.message)
