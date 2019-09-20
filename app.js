@@ -2,11 +2,8 @@ require('newrelic');
 
 const moment = require('moment');
 const fetch = require('node-fetch');
-const express = require('express')
 
 process.env.NTBA_FIX_319 = 1;
-
-const app = express()
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -21,7 +18,7 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
     "4632915617", "17461783368", "2309685226", "9031085917", "7798867374",
     "403624619", "5911240336", "404977516", "2369155882", "8559079805",
     "7991953827", "3187360479", "13984947986", "7352850050", "4200070420",
-    "3584001259"
+    "3584001259", "1366502378"
 ];
 
 const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
@@ -85,8 +82,5 @@ setInterval(() => {
             })
             .catch(err => bot.sendMessage(hashtag.userId, err.message));
     }
-
-    console.log
 }, 1800000);
 
-app.listen(process.env.PORT || 5000);
