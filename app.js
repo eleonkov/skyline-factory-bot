@@ -27,7 +27,7 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
 const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
     'repost', 'tap', 'credits', 'credit', 'siga', 'подписывайся', 'forza'] ;
 
-const token = '846500630:AAHcIYj2O7ooF7H7m0p8Pwp0idmOVEaVW4c';
+const token = '912805972:AAG85fb7RnSIeiatm8BEE-DWfXKe6XA-P08';
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/track-hashtag [A-Za-z0-9_]*/, (msg, match) => {
