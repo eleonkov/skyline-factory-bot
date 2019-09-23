@@ -28,7 +28,7 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
 
 const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
     'repost', 'tap', 'credits', 'credit', 'siga', 'подписывайся', 'forza',
-    'visit', 'bio', 'golf'];
+    'visit', 'bio', 'golf', 'bmw'];
 
 const accessibilityWords = ['text', 'текс', 'человек', 'люди', 'people'];
 
@@ -79,7 +79,7 @@ setInterval(() => {
                 let imageWithTheMostLikes = edges.filter(post => (post.node.__typename === "GraphImage"
                     && post.node.taken_at_timestamp > moment().subtract(30, 'minutes').unix()
                     && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length === 0
-                    && !accessibilityWords.filter(word => post.node.accessibility_caption.includes(word)).length === 0
+                    && accessibilityWords.filter(word => post.node.accessibility_caption.includes(word)).length === 0
                     && !blackList.includes(post.node.owner.id)))
                     .sort((a, b) => b.node.edge_liked_by.count - a.node.edge_liked_by.count)[0] || null;
 
