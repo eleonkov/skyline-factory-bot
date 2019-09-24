@@ -23,12 +23,16 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
     "12132062326", "7207529175", "18072048320", "3719869750", "9236409807",
     "264486119", "9203804939", "1995344391", "186424576", "4093683954",
     "2256052755", "12132062326", "2990560961", "8659319803", "27323400",
-    "2305067206", "2878462652", "9203804939", "6168336170", "10594081955"
+    "2305067206", "2878462652", "9203804939", "6168336170", "10594081955",
+    "1686362664", "45931238", "8050130364", "3673006141", "421012756",
+    "11682391467", "19589373253", "243764827", "10900040038"
 ];
 
 const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
     'repost', 'tap', 'credits', 'credit', 'siga', 'подписывайся', 'forza',
-    'visit', 'bio', 'golf', 'bmw'];
+    'visit', 'bio', 'golf', 'bmw', 'япония', 'www', 'рассрочка', 'opel',
+    'honda', 'ford', 'audi'
+];
 
 const accessibilityWords = ['text', 'текс', 'человек', 'люди', 'people'];
 
@@ -72,12 +76,14 @@ setInterval(() => {
 
                 let videoWithTheMostViews = edges.filter(post => (post.node.__typename === "GraphVideo"
                     && post.node.taken_at_timestamp > moment().subtract(30, 'minutes').unix()
+                    && post.node.video_view_count > 1
                     && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length === 0
                     && !blackList.includes(post.node.owner.id)))
                     .sort((a, b) => b.node.video_view_count - a.node.video_view_count)[0] || null;
 
                 let imageWithTheMostLikes = edges.filter(post => (post.node.__typename === "GraphImage"
                     && post.node.taken_at_timestamp > moment().subtract(30, 'minutes').unix()
+                    && post.node.edge_liked_by.count > 1
                     && stopWords.filter(word => post.node.edge_media_to_caption.edges[0].node.text.toLowerCase().includes(word)).length === 0
                     && accessibilityWords.filter(word => post.node.accessibility_caption.includes(word)).length === 0
                     && !blackList.includes(post.node.owner.id)))
