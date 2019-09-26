@@ -1,5 +1,3 @@
-require('newrelic');
-
 const moment = require('moment');
 const fetch = require('node-fetch');
 
