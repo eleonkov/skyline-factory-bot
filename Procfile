@@ -1,1 +1,0 @@
-worker: node app.js 5000
