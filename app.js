@@ -29,7 +29,7 @@ const blackList = ["2252680122", "6218218597", "6367032077", "4095468927",
 const stopWords = ['via', 'dm', 'tag', 'follow', 'pic', 'подпишись',
     'repost', 'tap', 'credits', 'credit', 'siga', 'подписывайся', 'forza',
     'visit', 'bio', 'golf', 'bmw', 'япония', 'www', 'рассрочка', 'opel',
-    'honda', 'ford', 'audi', 'volks'
+    'honda', 'ford', 'audi', 'volks', 'ferrari', 'mazda'
 ];
 
 const accessibilityWords = ['text', 'текс', 'человек', 'люди', 'people'];
